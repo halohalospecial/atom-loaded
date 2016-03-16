@@ -22,7 +22,7 @@ class LoadedView extends HTMLElement
     @emitter = new Emitter
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.commands.add 'atom-text-editor.loaded',
-      # # # 'blur':  => @hide()
+      'blur':  => @hide()
       'loaded:cancel':  => @hide() # escape
       'loaded:autocomplete': => @autocomplete() # tab
       'loaded:open': => @open() # enter
