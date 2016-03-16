@@ -1,7 +1,7 @@
 {
   "name": "loaded",
   "main": "./lib/loaded",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Open files and directories à la Emacs ido-mode.  Can also create new files and directories if they don't exist.",
   "keywords": [
     "open",
