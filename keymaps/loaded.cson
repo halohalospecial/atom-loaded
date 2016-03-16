@@ -1,0 +1,9 @@
+'atom-text-editor.loaded.autocomplete-active':
+  'tab': 'loaded:autocomplete'
+  'enter': 'loaded:open'
+  'shift-enter': 'loaded:open-or-create'
+  'backspace': 'loaded:backspace'
+  'escape': 'loaded:cancel'
+
+  'pageup': 'core:page-up'
+  'pagedown': 'core:page-down'

@@ -1,0 +1,27 @@
+@import "ui-variables";
+
+atom-text-editor.loaded,
+atom-text-editor.loaded::shadow {
+  // Imitate mini editor.
+  margin: 4px 2px;
+  padding: 4px 2px;
+  background-color: @button-border-color;
+  border: 2px solid @button-background-color-selected;
+  box-sizing: border-box;
+  border-radius: @component-border-radius;
+
+  // Hide editor scrollbars.
+  .horizontal-scrollbar, .vertical-scrollbar, .scrollbar-corner {
+    opacity: 0;
+    height: 0;
+  }
+
+  // Colorize special characters (/, \, ~, ., :) in Location grammar.
+  .special.location {
+      color: @syntax-color-function;
+  }
+
+  .invalid-fragment .region {
+    border-bottom: 1px solid @background-color-error;
+  }
+}

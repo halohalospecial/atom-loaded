@@ -1,0 +1,33 @@
+{
+  "name": "loaded",
+  "main": "./lib/loaded",
+  "version": "0.1.0",
+  "description": "Open files and directories à la Emacs ido-mode.  Can also create new files and directories if they don't exist.",
+  "keywords": [
+    "open",
+    "file",
+    "directory",
+    "folder",
+    "ido"
+  ],
+  "activationCommands": {
+    "atom-workspace": "loaded:show"
+  },
+  "repository": "https://github.com/halohalospecial/atom-loaded",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+    "untildify": "^2.1.0",
+    "mkdirp": "^0.5.1",
+    "touch": "^1.0.0"
+  },
+  "providedServices": {
+    "autocomplete.provider": {
+      "versions": {
+        "2.0.0": "provide"
+      }
+    }
+  }
+}

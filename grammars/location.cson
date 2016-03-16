@@ -1,0 +1,9 @@
+'scopeName': 'text.location'
+'name': 'Location'
+'fileTypes': []
+'patterns': [
+  {
+    'match': '(\/|\\|\\.|:)+'
+    'name': 'special.location'
+  }
+]
