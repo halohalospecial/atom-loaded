@@ -21,7 +21,8 @@
   "dependencies": {
     "untildify": "^2.1.0",
     "mkdirp": "^0.5.1",
-    "touch": "^1.0.0"
+    "touch": "^1.0.0",
+    "fuzzaldrin": "^2.1.0"
   },
   "providedServices": {
     "autocomplete.provider": {

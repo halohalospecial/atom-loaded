@@ -1,5 +1,6 @@
 {Emitter, CompositeDisposable} = require 'atom'
 path = require 'path'
+fuzzaldrin = require 'fuzzaldrin'
 
 class LoadedView extends HTMLElement
   init: ->
@@ -29,13 +30,41 @@ class LoadedView extends HTMLElement
       'loaded:open-or-create': => @openOrCreate() # shift-enter
       'loaded:backspace': => @backspace() # backspace
 
-    # Get reference to AutocompleteManager from the autocomplete-plus package.
+    # Get reference to `AutocompleteManager` from the `autocomplete-plus` package.
     autocompletePackage = atom.packages.getActivePackage 'autocomplete-plus'
     @autocompleteManager = autocompletePackage.mainModule.getAutocompleteManager()
+
+    # Override `filterSuggestions` function to allow matching characters which are not in the first position.
+    @autocompleteManager.filterSuggestions = @filterSuggestions.bind @autocompleteManager
 
   onOpen: (fn) -> @emitter.on 'open', fn
   onOpenOrCreate: (fn) -> @emitter.on 'open-or-create', fn
   onDidChangeLocation: (fn) -> @emitter.on 'did-change-location', fn
+
+  # Modified from https://github.com/atom/autocomplete-plus/blob/7cca9b663a29d60e3257cb6c446c752a3fc01352/lib/autocomplete-manager.coffee.
+  # Allows matching characters which are not in the first position.  (Example: "b" will match "lib")
+  filterSuggestions: (suggestions, {prefix}) ->
+    results = []
+    for suggestion, i in suggestions
+      # sortScore mostly preserves in the original sorting. The function is
+      # chosen such that suggestions with a very high match score can break out.
+      suggestion.sortScore = Math.max(-i / 10 + 3, 0) + 1
+      suggestion.score = null
+
+      text = (suggestion.snippet or suggestion.text)
+      suggestionPrefix = suggestion.replacementPrefix ? prefix
+      prefixIsEmpty = not suggestionPrefix or suggestionPrefix is ' '
+      #firstCharIsMatch = not prefixIsEmpty and suggestionPrefix[0].toLowerCase() is text[0].toLowerCase()
+
+      if prefixIsEmpty
+        results.push(suggestion)
+      #if firstCharIsMatch and (score = fuzzaldrin.score(text, suggestionPrefix)) > 0
+      if (score = fuzzaldrin.score(text, suggestionPrefix)) > 0
+        suggestion.score = score * suggestion.sortScore
+        results.push(suggestion)
+
+    results.sort(@reverseSortOnScoreComparator)
+    results
 
   destroy: ->
     @emitter.dispose()
