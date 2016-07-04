@@ -134,7 +134,6 @@ module.exports = Loaded =
         break
     @view.renderInvalidFragmentRange invalidFragmentRange
 
-# # # TODO: Still needs the first letter of a candidate before it can match (e.g. typing "b" will not match "lib", but "lb" will).
 # # # TODO: If location is a directory, add as project and auto-select in tree view.
 # # # TODO: Icons?
 # # # TODO: Test in Windows.
